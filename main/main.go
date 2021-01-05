@@ -5,7 +5,7 @@ import (
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
-	qtree "github.com/switchGH/quadtree-search/quadtree"
+	qtree "github.com/switchGH/quadtree-module"
 )
 
 type repository struct {
