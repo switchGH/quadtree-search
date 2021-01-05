@@ -5,7 +5,7 @@ DOCKER_DNS:=db
 FLYWAY_CONF?=-url=jdbc:mysql://$(DOCKER_DNS):3306/$(DBNAME) -user=root -password=password
 
 run:
-	go run ./quadtree
+	go run ./main
 
 DB_SERVICE:=db
 mysql/client:
