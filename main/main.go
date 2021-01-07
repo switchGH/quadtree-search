@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -49,8 +50,11 @@ func (r *repository) insert(point *qtree.Point) error {
 // 近傍検索をする
 func (r *repository) search(point *qtree.Point, depth int32) ([]*qtree.Point, error) {
 	_, path := r.tree.Path(point, depth)
+	//fmt.Printf("Path: %s\n", path)
 	// 内包する深さdepthの領域の子孫に位置する点をSELECTする(sqlxで実装したい)
-	rows, err := r.db.Query("SELECT x, y FROM result WHERE ? <= path AND path <= ?", path, path+"~")
+	//rows, err := r.db.Query("SELECT x, y FROM result")
+	//rows, err := r.db.Query("SELECT x, y FROM result WHERE ? <= path AND path <= ?", path, path+"~")
+	rows, err := r.db.Query("SELECT x, y FROM result WHERE path LIKE ?", path+"%")
 	if err != nil {
 		return nil, err
 	}
@@ -68,6 +72,7 @@ func (r *repository) search(point *qtree.Point, depth int32) ([]*qtree.Point, er
 			X: x,
 			Y: y,
 		}
+		//fmt.Printf("%+v\n", dbpoint)
 		points = append(points, dbpoint)
 	}
 	// ループが正常に終了したか確認する(https://golang.shop/post/go-databasesql-07-error-handling-ja/)
@@ -82,6 +87,7 @@ func (r *repository) getPointData(point *qtree.Point) ([]*qtree.Point, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
 	points := []*qtree.Point{}
 	for rows.Next() {
@@ -114,26 +120,57 @@ func main() {
 		log.Fatal(err)
 		return
 	}
-
-	// DBから対象となるデータの経度・緯度を取得する
-	point := qtree.Point{}
-	points, err := repo.getPointData(&point)
-	if err != nil {
-		log.Fatal(err)
-	}
-	//fmt.Printf("%+v", points[0])
 	defer repo.finalize()
 
+	// DBから対象となるデータの経度・緯度を取得する
+	// point := qtree.Point{}
+	// points, err := repo.getPointData(&point)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	//fmt.Printf("%+v", points[0])
+
 	// 経路(path)を追加したデータをDBに挿入する
-	for _, v := range points {
-		p := &qtree.Point{
-			X: v.X,
-			Y: v.Y,
-		}
-		if err := repo.insert(p); err != nil {
+	// for _, v := range points {
+	// 	p := &qtree.Point{
+	// 		X: v.X,
+	// 		Y: v.Y,
+	// 	}
+	// 	if err := repo.insert(p); err != nil {
+	// 		log.Fatal(err)
+	// 		return
+	// 	}
+	// }
+
+	// 検索対象地点
+	p := &qtree.Point{
+		X: 135.45,
+		Y: 34.6,
+	}
+
+	// 領域近傍検索
+	fmt.Println("領域近傍検索")
+	ps, err := repo.search(p, 3)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
+	for _, p := range ps {
+		fmt.Printf("matched: (%f, %f)\n", p.X, p.Y)
+	}
+
+	// pを内包する深さ5の領域と8近傍の子孫に含まれる点をSELECTする
+	fmt.Println("検索地点を内包する深さ5の領域と8近傍の子孫に含まれる点をSELECTする")
+	node, _ := repo.tree.Path(p, 5)
+	for _, a := range node.Adjacent() {
+		ps, err := repo.search(a.Mid(), node.Depth)
+		if err != nil {
 			log.Fatal(err)
 			return
 		}
+		for _, p := range ps {
+			fmt.Printf("matched: (%f,%f)\n", p.X, p.Y)
+		}
 	}
-	// 検索
 }
