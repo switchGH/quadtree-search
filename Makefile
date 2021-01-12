@@ -4,8 +4,25 @@ DBNAME:=test
 DOCKER_DNS:=db
 FLYWAY_CONF?=-url=jdbc:mysql://$(DOCKER_DNS):3306/$(DBNAME) -user=root -password=password
 
-run:
-	go run ./main
+export DATABASE_DATASOURCE:=root:password@tcp($(DOCKER_DNS):3306)/$(DBNAME)
+
+docker-compose/build:
+	docker-compose build
+
+docker-compose/up:
+	docker-compose up
+
+docker-compose/restart:
+	docker-compose restart
+
+docker-compose/up/service:
+	docker-compose up $(service)
+
+docker-compose/down:
+	docker-compose down
+
+docker-compose/logs:
+	docker-compose logs -f
 
 DB_SERVICE:=db
 mysql/client:

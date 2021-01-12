@@ -20,5 +20,16 @@ services:
     volumes:
       - ./database/migration/schema:/flyway/sql
 
+  api:
+    build:
+      context: ./backend
+    command: reflex -r '\.go$$' -s -- sh -c 'go run api/main.go -databaseDatasource="${DATABASE_DATASOURCE}" -port=1991'
+    container_name: quadtree-api
+    ports:
+      - 1991:1991
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+
 volumes:
   data-volume: 
