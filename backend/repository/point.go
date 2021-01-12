@@ -8,7 +8,7 @@ import (
 
 func AllPoint(db *sqlx.DB) ([]model.Point, error) {
 	a := make([]model.Point, 0)
-	if err := db.Select(&a, `SELECT * FROM result`); err != nil {
+	if err := db.Select(&a, `SELECT * FROM points`); err != nil {
 		return nil, err
 	}
 	return a, nil
