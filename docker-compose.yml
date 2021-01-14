@@ -31,5 +31,18 @@ services:
       - ./backend:/app
     working_dir: /app
 
+  frontend:
+    build:
+      context: ./frontend
+    command: yarn dev
+    container_name: quadtree-frontend
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+      - quadtree_node_modules-volume:/app/node_modules
+    working_dir: /app
+
 volumes:
-  data-volume: 
+  data-volume:
+  quadtree_node_modules-volume:

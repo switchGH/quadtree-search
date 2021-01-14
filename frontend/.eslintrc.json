@@ -1,0 +1,9 @@
+{
+    "parser": "babel-eslint",
+    "rules": {
+        "no-extra-semi": "warn",
+        "quotes": ["warn", "single"],
+        "no-undef": "warn",
+        "space-before-blocks": ["warn", { "functions": "always" }]
+    }
+}
