@@ -23,7 +23,7 @@ func (p *Place) Index(_ http.ResponseWriter, r *http.Request) (int, interface{},
 	neLat, _ := strconv.ParseFloat(r.URL.Query().Get("ne_lat"), 64)
 	neLng, _ := strconv.ParseFloat(r.URL.Query().Get("ne_lng"), 64)
 
-	places, err := repository.GetAreaPlaces(p.db, swLat, swLng, neLat, neLng)
+	places, err := repository.SearchLatLng(p.db, swLat, swLng, neLat, neLng)
 	if err != nil {
 		return http.StatusInternalServerError, nil, err
 	}

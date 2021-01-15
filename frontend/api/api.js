@@ -12,7 +12,7 @@ const toJson = async res => {
 // 表示領域内の地点を取得する(領域内4点)
 export const getAreaPlaces = async (params) => {
     const usp = new URLSearchParams(params)
-    const resp = await fetch(`${API_ENDPOINT}/place?${usp}`, {
+    const resp = await fetch(`${API_ENDPOINT}/latlng?${usp}`, {
         credentials: 'same-origin'
     })
     return await toJson(resp)
