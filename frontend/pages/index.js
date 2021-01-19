@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import GoogleMap from '../components/GoogleMap'
 import Marker from '../components/Maker'
-import { getAreaPlaces } from '../api/api'
+import { getPlacesByLatlng } from '../api/api'
 
 const Home = () => {
   const [center, setCenter] = useState({ lat: 34.4111, lng: 135.3008 })
@@ -16,7 +16,7 @@ const Home = () => {
       ne_lng: 135.30649265335796 // 北東の経度
     }
     // 範囲内の地点データを取得する
-    const res_json = await getAreaPlaces(framaPoint).catch(e => {
+    const res_json = await getPlacesByLatlng(framaPoint).catch(e => {
       console.log(e)
     })
     // 表示POPが閉じている状態にする
@@ -51,7 +51,7 @@ const Home = () => {
         ne_lng: neLatlng.lng()
     }
     // 範囲内の地点データを取得する
-    const res_json = await getAreaPlaces(params).catch(e => {
+    const res_json = await getPlacesByLatlng(params).catch(e => {
       console.log(e)
     })
     res_json.filter(place => {
