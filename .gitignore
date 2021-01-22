@@ -5,3 +5,6 @@ import_sql.sh
 
 # mysql logs
 /database/logs/*
+
+# sql file
+/sql_file/*
