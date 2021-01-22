@@ -1,1 +1,7 @@
 .DS_Store
+
+# shell
+import_sql.sh
+
+# mysql logs
+/database/logs/*
