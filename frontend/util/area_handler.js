@@ -1,7 +1,8 @@
-const MAX_NE_LAT = 35.05234 // 北東緯度
-const MAX_NE_LNG = 135.74641 // 北東経度
 const MIN_SW_LAT = 34.27256 // 南西緯度
 const MIN_SW_LNG = 135.09194 // 南西経度
+const MAX_NE_LAT = 35.05234 // 北東緯度
+const MAX_NE_LNG = 135.74641 // 北東経度
+
 
 const one_divive_center = {
     lat: 34.66245,

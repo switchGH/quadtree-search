@@ -56,7 +56,7 @@ func (r *repository) search(point *qtree.Point, depth int32) ([]*qtree.Point, er
 	_, path := r.tree.Path(point, depth)
 	//fmt.Printf("Path: %s\n", path)
 	// 内包する深さdepthの領域の子孫に位置する点をSELECTする(sqlxで実装したい)
-	rows, err := r.db.Query("SELECT id, x, y FROM data15 WHERE path LIKE ?", path+"%")
+	rows, err := r.db.Query("SELECT id, longitude, latitude FROM data15 WHERE path LIKE ?", path+"%")
 	if err != nil {
 		return nil, err
 	}
@@ -66,15 +66,15 @@ func (r *repository) search(point *qtree.Point, depth int32) ([]*qtree.Point, er
 	points := []*qtree.Point{}
 	for rows.Next() {
 		var id int64
-		var x, y float64
-		err := rows.Scan(&id, &x, &y)
+		var longitude, latitude float64
+		err := rows.Scan(&id, &longitude, &latitude)
 		if err != nil {
 			return nil, err
 		}
 		dbpoint := &qtree.Point{
 			ID: id,
-			X:  x,
-			Y:  y,
+			X:  longitude,
+			Y:  latitude,
 		}
 		//fmt.Printf("%+v\n", dbpoint)
 		points = append(points, dbpoint)
@@ -87,7 +87,7 @@ func (r *repository) search(point *qtree.Point, depth int32) ([]*qtree.Point, er
 }
 
 func (r *repository) getPointData(point *qtree.Point) ([]*qtree.Point, error) {
-	rows, err := r.db.Query("SELECT id, x, y FROM data15")
+	rows, err := r.db.Query("SELECT id, longitude, latitude FROM data15")
 	if err != nil {
 		return nil, err
 	}
@@ -95,13 +95,15 @@ func (r *repository) getPointData(point *qtree.Point) ([]*qtree.Point, error) {
 
 	points := []*qtree.Point{}
 	for rows.Next() {
-		if err := rows.Scan(&point.ID, &point.X, &point.Y); err != nil {
+		var id int64
+		var longitude, latitude float64
+		if err := rows.Scan(&id, &longitude, &latitude); err != nil {
 			return nil, err
 		}
 		dbpoint := &qtree.Point{
-			ID: point.ID,
-			X:  point.X,
-			Y:  point.Y,
+			ID: id,
+			X:  longitude,
+			Y:  latitude,
 		}
 		points = append(points, dbpoint)
 	}
@@ -110,13 +112,22 @@ func (r *repository) getPointData(point *qtree.Point) ([]*qtree.Point, error) {
 
 func main() {
 	// 扱いたい領域の端2点
+	// minPoint := &qtree.Point{
+	// 	X: 135.0,
+	// 	Y: 34.0,
+	// }
+	// maxPoint := &qtree.Point{
+	// 	X: 136.0,
+	// 	Y: 35.0,
+	// }
+	// 大阪府の領域
 	minPoint := &qtree.Point{
-		X: 135.0,
-		Y: 34.0,
+		X: 135.09194,
+		Y: 34.27256,
 	}
 	maxPoint := &qtree.Point{
-		X: 136.0,
-		Y: 35.0,
+		X: 135.74641,
+		Y: 35.05234,
 	}
 
 	repo := &repository{}

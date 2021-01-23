@@ -12,6 +12,9 @@ docker-compose/build:
 docker-compose/up:
 	docker-compose up
 
+docker-compose/up-d:
+	docker-compose up -d
+
 docker-compose/restart:
 	docker-compose restart
 

@@ -2,12 +2,12 @@ CREATE TABLE data15 (
   id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
   institution_id INTEGER NOT NULL,
   institution_name VARCHAR(255),
-  x REAL NOT NULL,
-  y REAL NOT NULL,
+  longitude REAL NOT NULL,
+  latitude REAL NOT NULL,
   path TEXT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO data15 (institution_id, y, x, institution_name) VALUES
+INSERT INTO data15 (institution_id, latitude, longitude, institution_name) VALUES
 ('141634364', 34.66935, 135.503528, '２階階段横'),
 ('181121300', 34.6778324, 135.522154, '憩いの広場第2ベンチ横'),
 ('253554467', 34.783754, 135.585737, '正面入り口横'),
