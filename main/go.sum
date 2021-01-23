@@ -3,3 +3,5 @@ github.com/go-sql-driver/mysql v1.5.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LB
 github.com/mattn/go-sqlite3 v2.0.1+incompatible/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
 github.com/switchGH/quadtree-module v0.0.0-20210112060148-f33f12b04fc1 h1:e/+Wz25A4glxqYSAsM/qCr9vw/JgwQQbo5cdZPIxN3U=
 github.com/switchGH/quadtree-module v0.0.0-20210112060148-f33f12b04fc1/go.mod h1:XE9J1f+DYD150oRPDgzkjRzVLJCCOMi+RHHXkZrphc0=
+github.com/switchGH/quadtree-module v0.0.0-20210123044551-e6cc02512d1b h1:HbWgsJ+vuOqWnhWsXPGBBAqd6x8xAnNGnbpyAE2TGdk=
+github.com/switchGH/quadtree-module v0.0.0-20210123044551-e6cc02512d1b/go.mod h1:XE9J1f+DYD150oRPDgzkjRzVLJCCOMi+RHHXkZrphc0=

@@ -1,1 +1,0 @@
-CREATE INDEX indexPath ON points(path(255));

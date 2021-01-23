@@ -1,0 +1,1 @@
+CREATE INDEX indexPath ON data15(path(255));
