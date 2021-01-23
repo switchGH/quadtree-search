@@ -19,9 +19,8 @@ export const getPlacesByLatlng = async (params) => {
 }
 
 // ４分木探索(領域値)
-export const getPlacesByQuadtree = async (params) => {
-    const usp = new URLSearchParams(params)
-    const resp = await fetch(`${API_ENDPOINT}/quadtree?${usp}`, {
+export const getPlacesByPath = async (path) => {
+    const resp = await fetch(`${API_ENDPOINT}/quadtree?path=${path}`, {
         credentials: 'same-origin'
     })
     return await toJson(resp)

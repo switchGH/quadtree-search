@@ -65,9 +65,8 @@ func (s *Server) Route() *mux.Router {
 		corsMiddleware.Handler,
 	)
 	r := mux.NewRouter()
-	pointController := controller.NewPoint(s.db)
-	latlngController := controller.NewPlace(s.db)
-	r.Methods(http.MethodGet).Path("/quadtree").Handler(commonChain.Then(AppHandler{pointController.Index}))
-	r.Methods(http.MethodGet).Path("/latlng").Handler(commonChain.Then(AppHandler{latlngController.Index}))
+	placeController := controller.NewPlace(s.db)
+	r.Methods(http.MethodGet).Path("/quadtree").Handler(commonChain.Then(AppHandler{placeController.GetPlacesByPath}))
+	r.Methods(http.MethodGet).Path("/latlng").Handler(commonChain.Then(AppHandler{placeController.GetPlacesByLatlng}))
 	return r
 }

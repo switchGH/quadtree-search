@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import GoogleMap from '../components/GoogleMap'
 import Marker from '../components/Maker'
-import { getPlacesByLatlng } from '../api/api'
+import { getPlacesByLatlng, getPlacesByPath } from '../api/api'
 import { getPath } from '../util/area_handler'
 
 const Home = () => {
@@ -16,13 +16,16 @@ const Home = () => {
       ne_lat: 34.41583173345069, // 北東の緯度
       ne_lng: 135.30649265335796 // 北東の経度
     }
-    // pathを求める
+    // 領域値による探索
     const path = getPath(center);
     console.log(path)
-    // 範囲内の地点データを取得する
-    const res_json = await getPlacesByLatlng(framaPoint).catch(e => {
+    const res_json = await getPlacesByPath(path).catch(e => {
       console.log(e)
     })
+    // 経度緯度による探索
+    // const res_json = await getPlacesByLatlng(framaPoint).catch(e => {
+    //   console.log(e)
+    // })
     // 表示POPが閉じている状態にする
     res_json.filter(place => {
       place.show = false
@@ -48,9 +51,6 @@ const Home = () => {
       lng: map.center.lng()
     }
     console.log(center)
-    // pathを求める
-    const path = getPath(center)
-    console.log(path)
     // 表示領域4点を取得する
     const latlngBounds = map.getBounds(); //表示領域の座標
     const swLatlng = latlngBounds.getSouthWest(); // 南西
@@ -61,10 +61,16 @@ const Home = () => {
         ne_lat: neLatlng.lat(),
         ne_lng: neLatlng.lng()
     }
-    // 範囲内の地点データを取得する
-    const res_json = await getPlacesByLatlng(params).catch(e => {
+    // 領域値による探索
+    const path = getPath(center)
+    console.log(path)
+    const res_json = await getPlacesByPath(path).catch(e => {
       console.log(e)
     })
+    // 経度緯度による探索
+    // const res_json = await getPlacesByLatlng(params).catch(e => {
+    //   console.log(e)
+    // })
     res_json.filter(place => {
       place.show = false
     })

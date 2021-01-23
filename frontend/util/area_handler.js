@@ -10,6 +10,7 @@ const one_divive_center = {
 }
 
 export const getPath = (center) => {
+    console.log(center)
     const { lat, lng } = center
     let path = 0
     // 中心座標から領域値を決定する(例外処理必要)
