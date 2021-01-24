@@ -7,8 +7,9 @@ quadtree-search
 ## Requirement
 - macOS
 - Docker 20.10.2
-- Node.js
+- Node.js (Next.js)
 - Golang
+- Flyway
 - Mysql 8.0
 
 ## Usage
