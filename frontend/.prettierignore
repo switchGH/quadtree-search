@@ -1,0 +1,6 @@
+.cache
+.next
+.eslintrc.json
+package.json
+package-lock.json
+public

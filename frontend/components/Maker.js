@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InfoWindow from './InfoWindow';
 
-const Marker = (place) => {
+const Marker = place => {
     const markerStyle = {
         border: '1px solid white',
         borderRadius: '50%',
