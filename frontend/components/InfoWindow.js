@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 const InfoWindow = props => {
     const { place } = props;
     const infoWindowStyle = {
-      position: 'relative', 
-      bottom: 120,
+        position: 'relative',
+        bottom: 120,
         borderRadius: '10px',
         left: '-45px',
         width: 220,
@@ -18,8 +18,8 @@ const InfoWindow = props => {
 
     return (
         <div style={infoWindowStyle}>
-        <div style={{ fontSize: 14 }}>{place.name}</div>
-        {/* <div style={{fontSize: 10 }}>
+            <div style={{ fontSize: 14 }}>{place.name}</div>
+            {/* <div style={{fontSize: 10 }}>
           <span style={{ color: 'grey' }}>〒{place.post_code}</span>
         </div>
         <div style={{fontSize: 10 }}>
