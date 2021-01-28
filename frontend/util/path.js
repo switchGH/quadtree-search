@@ -1,7 +1,7 @@
-export const calcPath = (rep, center, min_sw, max_ne, divive_center, path) => {
+export const calcPath = (depth, center, min_sw, max_ne, divive_center, path) => {
     const { lat, lng } = center;
     // 深さに応じて処理
-    if (path.length == rep) {
+    if (path.length == depth) {
         return path;
     }
     // 経度緯度で領域値を判断する
@@ -17,7 +17,7 @@ export const calcPath = (rep, center, min_sw, max_ne, divive_center, path) => {
             lat: (min_sw.lat + divive_center.lat) / 2,
             lng: (min_sw.lng + divive_center.lng) / 2,
         };
-        return calcPath(rep, center, min_sw, divive_center, new_center, path);
+        return calcPath(depth, center, min_sw, divive_center, new_center, path);
     } else if (
         lat >= min_sw.lat &&
         lat <= divive_center.lat &&
@@ -38,7 +38,7 @@ export const calcPath = (rep, center, min_sw, max_ne, divive_center, path) => {
             lat: (new_sw_min.lat + new_ne_max.lat) / 2,
             lng: (new_sw_min.lng + new_ne_max.lng) / 2,
         };
-        return calcPath(rep, center, new_sw_min, new_ne_max, new_center, path);
+        return calcPath(depth, center, new_sw_min, new_ne_max, new_center, path);
     } else if (
         lat >= divive_center.lat &&
         lat <= max_ne.lat &&
@@ -59,7 +59,7 @@ export const calcPath = (rep, center, min_sw, max_ne, divive_center, path) => {
             lat: (new_sw_min.lat + new_ne_max.lat) / 2,
             lng: (new_sw_min.lng + new_ne_max.lng) / 2,
         };
-        return calcPath(rep, center, new_sw_min, new_ne_max, new_center, path);
+        return calcPath(depth, center, new_sw_min, new_ne_max, new_center, path);
     } else if (
         lat >= divive_center.lat &&
         lat <= max_ne.lat &&
@@ -73,6 +73,6 @@ export const calcPath = (rep, center, min_sw, max_ne, divive_center, path) => {
             lat: (divive_center.lat + max_ne.lat) / 2,
             lng: (divive_center.lng + max_ne.lng) / 2,
         };
-        return calcPath(rep, center, new_sw_min, max_ne, new_center, path);
+        return calcPath(depth, center, new_sw_min, max_ne, new_center, path);
     }
 };
