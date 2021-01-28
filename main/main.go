@@ -139,25 +139,25 @@ func main() {
 	defer repo.finalize()
 
 	// DBから対象となるデータの経度・緯度を取得する
-	point := qtree.Point{}
-	points, err := repo.getPointData(&point)
-	if err != nil {
-		log.Fatal(err)
-	}
+	//point := qtree.Point{}
+	// points, err := repo.getPointData(&point)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 	//fmt.Printf("%+v", points[0])
 
 	// 経路(path)を追加したデータをDBに挿入する
-	for _, v := range points {
-		p := &qtree.Point{
-			ID: v.ID,
-			X:  v.X,
-			Y:  v.Y,
-		}
-		if err := repo.addPath(p); err != nil {
-			log.Fatal(err)
-			return
-		}
-	}
+	// for _, v := range points {
+	// 	p := &qtree.Point{
+	// 		ID: v.ID,
+	// 		X:  v.X,
+	// 		Y:  v.Y,
+	// 	}
+	// 	if err := repo.addPath(p); err != nil {
+	// 		log.Fatal(err)
+	// 		return
+	// 	}
+	// }
 
 	// 検索対象地点
 	p := &qtree.Point{

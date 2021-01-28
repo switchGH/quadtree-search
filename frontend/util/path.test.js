@@ -60,3 +60,18 @@ test('深さ2に設定、領域値は3*になるはず', () => {
     expect(calcPath(2, { lat: 34.86, lng: 135.42 }, min_sw, max_ne, divive_center, '')).toBe('32');
     expect(calcPath(2, { lat: 35.0, lng: 135.73 }, min_sw, max_ne, divive_center, '')).toBe('33');
 });
+
+test('深さ3に設定、領域値は00*になるはず', () => {
+    expect(calcPath(3, { lat: 34.30, lng: 135.10 }, min_sw, max_ne, divive_center, '')).toBe('000');
+    expect(calcPath(3, { lat: 34.30, lng: 135.174 }, min_sw, max_ne, divive_center, '')).toBe('001');
+    expect(calcPath(3, { lat: 34.38, lng: 135.11 }, min_sw, max_ne, divive_center, '')).toBe('002');
+    expect(calcPath(3, { lat: 34.40, lng: 135.20 }, min_sw, max_ne, divive_center, '')).toBe('003');
+});
+
+test('深さ3に設定、領域値は01*になるはず', () => {
+    expect(calcPath(3, { lat: 34.29, lng: 135.30 }, min_sw, max_ne, divive_center, '')).toBe('010');
+    expect(calcPath(3, { lat: 34.35, lng: 135.40 }, min_sw, max_ne, divive_center, '')).toBe('011');
+    expect(calcPath(3, { lat: 34.39, lng: 135.32 }, min_sw, max_ne, divive_center, '')).toBe('012');
+    expect(calcPath(3, { lat: 34.45, lng: 135.38 }, min_sw, max_ne, divive_center, '')).toBe('013');
+});
+

@@ -23,7 +23,7 @@ const Home = () => {
         // })
 
         // 領域値による探索
-        const path = calcPath(2, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
+        const path = calcPath(3, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
         console.log(path);
         const res_json = await getPlacesByPath(path).catch(e => {
             console.log(e);
@@ -68,7 +68,7 @@ const Home = () => {
             lat: map.center.lat(),
             lng: map.center.lng(),
         };
-        const path = calcPath(2, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
+        const path = calcPath(3, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
         console.log(center);
         console.log(path);
         const res_json = await getPlacesByPath(path).catch(e => {
