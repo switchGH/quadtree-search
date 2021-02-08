@@ -17,14 +17,15 @@ const Home = () => {
         //   ne_lat: 34.41583173345069, // 北東の緯度
         //   ne_lng: 135.30649265335796 // 北東の経度
         // }
-        // 経度緯度による探索
+        // // 経度緯度による探索
         // const res_json = await getPlacesByLatlng(framaPoint).catch(e => {
         //   console.log(e)
         // })
-
+        //setTreeModel()
+        //console.log(json)
         // 領域値による探索
         const path = calcPath(3, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
-        console.log(path);
+        console.log("現在のPATH:", path);
         const res_json = await getPlacesByPath(path).catch(e => {
             console.log(e);
         });
@@ -34,7 +35,7 @@ const Home = () => {
         });
         setPlaces(res_json);
     }, []);
-
+ 
     // 地点クリック時のアクション
     const onClildClickCallback = key => {
         setPlaces(places => {
@@ -48,17 +49,19 @@ const Home = () => {
 
     // ドラッグアンドドロップ後のアクション
     const onDragEnd = async map => {
+        //console.log(searchNeighborhood('41'))
+        //console.log(json)
         // 表示領域4点を取得する
-        // const latlngBounds = map.getBounds(); //表示領域の座標
-        // const swLatlng = latlngBounds.getSouthWest(); // 南西
-        // const neLatlng = latlngBounds.getNorthEast(); // 北東
-        // const params = {
-        //     sw_lat: swLatlng.lat(),
-        //     sw_lng: swLatlng.lng(),
-        //     ne_lat: neLatlng.lat(),
-        //     ne_lng: neLatlng.lng()
-        // }
-        // 経度緯度による探索
+        const latlngBounds = map.getBounds(); //表示領域の座標
+        const swLatlng = latlngBounds.getSouthWest(); // 南西
+        const neLatlng = latlngBounds.getNorthEast(); // 北東
+        const params = {
+            sw_lat: swLatlng.lat(),
+            sw_lng: swLatlng.lng(),
+            ne_lat: neLatlng.lat(),
+            ne_lng: neLatlng.lng(),
+        };
+        // // 経度緯度による探索
         // const res_json = await getPlacesByLatlng(params).catch(e => {
         //   console.log(e)
         // })
@@ -68,9 +71,9 @@ const Home = () => {
             lat: map.center.lat(),
             lng: map.center.lng(),
         };
+        console.log('現在の中心点: ', center)
         const path = calcPath(3, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
-        console.log(center);
-        console.log(path);
+        console.log("現在のPATH: ", path)
         const res_json = await getPlacesByPath(path).catch(e => {
             console.log(e);
         });
@@ -78,7 +81,7 @@ const Home = () => {
         res_json.filter(place => {
             place.show = false;
         });
-        console.log(res_json);
+        console.log(res_json)
         setPlaces(res_json);
     };
 
