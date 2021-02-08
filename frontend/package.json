@@ -27,7 +27,9 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.17.0",
     "jest": "^26.6.3",
+    "list-to-tree": "^2.2.4",
     "prettier": "^2.2.1",
+    "tree-model": "^1.0.7",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.1"
   }
