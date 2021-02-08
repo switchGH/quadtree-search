@@ -1,6 +1,6 @@
 import TreeModel from 'tree-model';
 import LTT from 'list-to-tree'
-import { getPlaces } from '../api/api'
+// import { getPlaces } from '../api/api'
 import { treeModel } from './treeModel'
 
 const tree = new TreeModel();

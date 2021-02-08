@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { setPlacesJSON, setTreeModel, searchNeighborhood } from '../util/tree'
+import { setTreeModel, searchNeighborhood } from '../util/tree'
 import { calcPath } from '../util/path'
 import { getPlaces } from '../api/api'
 import { MIN_SW, MAX_NE, DIVIVE_CENTER } from '../osakafu_latlng';
@@ -8,13 +8,12 @@ const Search = () => {
     const [lat, setLat] = useState(34.69) // 緯度
     const [lng, setLng] = useState(135.61) // 経度
     const [res_json, setResJSON] = useState([]) // 全地点データ
-    const [places, setPlaces] = useState([{ institution_name: 'Hi', latitude: 34.69, longitude: 135.61}])
+    const [places, setPlaces] = useState([])
     useEffect(async () => {
         const json = await getPlaces().catch(e => {
             console.log(e);
         });
         setResJSON(json)
-        //console.log(res_json)
         //setPlacesJSON() // すべての地点データを取得する
         setTreeModel(json) // 木構造にデータを割り当てる
     }, [])
@@ -29,17 +28,23 @@ const Search = () => {
 
     const handleSubmit = (event) => {
         console.log(lat, lng)
+        const startTime = performance.now(); // 開始時間
         // 領域で検索
-        const path = calcPath(3, { lat, lng }, MIN_SW, MAX_NE, DIVIVE_CENTER, '')
-        console.log('検索領域: ', path)
-        // setPlaces(searchNeighborhood(path))
+        // const path = calcPath(3, { lat, lng }, MIN_SW, MAX_NE, DIVIVE_CENTER, '')
+        // const target_places = searchNeighborhood(path);
+        // console.log('検索領域: ', path)
 
         // 距離で検索
-        setPlaces(calcDistance(res_json, lat, lng))
+        const target_places = calcDistance(res_json, lat, lng);
+        
+        console.log("データ量: ", target_places.length)
+        setPlaces(target_places)
+        const endTime = performance.now(); // 終了時間
 
+        console.log(endTime - startTime); // 何ミリ秒かかったかを表示する
+        // console.log('更新データ: ', places)
         event.preventDefault();
     }
-
 
     return (
         <div>
@@ -57,7 +62,7 @@ const Search = () => {
             <div>
                 <ul>
                     {places.map(place => (
-                        <li key={place}>{place.institution_name} & {place.longitude} & {place.latitude} & {place.distance} & {place.path}</li>
+                        <li key={place.increment_id}>{place.institution_name} & {place.longitude} & {place.latitude} & {place.distance} & {place.path}</li>
                     ))}
                 </ul>
             </div>
@@ -76,17 +81,17 @@ const calcDistance = (places, lat, lng) => {
         let distance = 6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2));
         places[i].distance = distance
     }
-    // console.log('ソート前')
-    // console.log(places)
+
+    // 5km以内の以内のデータのみを絞る
+    const near_places = places.filter(place => place.distance <= 5)
+
     // 昇順にソートする
-    places.sort((a, b) => {
-        if( a.distance < b.distance ) return -1;
-        if( a.distance > b.distance ) return 1;
-        return 0;
-    })
-    // console.log('ソート後')
-    // console.log(places)
-    return places
+    // near_places.sort((a, b) => {
+    //     if( a.distance < b.distance ) return -1;
+    //     if( a.distance > b.distance ) return 1;
+    //     return 0;
+    // })
+    return near_places
 }
   
 export default Search
