@@ -25,3 +25,10 @@ export const getPlacesByPath = async path => {
     });
     return await toJson(resp);
 };
+
+export const getPlaces = async() => {
+    const resp = await fetch(`${API_ENDPOINT}/quadtree`, {
+        credentials: 'same-origin'
+    })
+    return await toJson(resp)
+}
