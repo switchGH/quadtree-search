@@ -27,21 +27,21 @@ const Search = () => {
     }
 
     const handleSubmit = (event) => {
-        console.log(lat, lng)
+        console.log("検索経度緯度", lng, lat)
         const startTime = performance.now(); // 開始時間
         // 領域で検索
-        // const path = calcPath(3, { lat, lng }, MIN_SW, MAX_NE, DIVIVE_CENTER, '')
-        // const target_places = searchNeighborhood(path);
-        // console.log('検索領域: ', path)
+        const path = calcPath(3, { lat, lng }, MIN_SW, MAX_NE, DIVIVE_CENTER, '')
+        const target_places = searchNeighborhood(path);
+        console.log('検索領域: ', path)
 
         // 距離で検索
-        const target_places = calcDistance(res_json, lat, lng);
+        //const target_places = calcDistance(res_json, lat, lng);
         
         console.log("データ量: ", target_places.length)
         setPlaces(target_places)
         const endTime = performance.now(); // 終了時間
 
-        console.log(endTime - startTime); // 何ミリ秒かかったかを表示する
+        console.log("計測結果(マイクロ秒)", endTime - startTime); // 何ミリ秒かかったかを表示する
         // console.log('更新データ: ', places)
         event.preventDefault();
     }
