@@ -16,9 +16,9 @@ const Home = () => {
         const all_places_data = await getPlaces().catch(e => {
             console.log(e);
         });
-        // all_places_data.filter(place => {
-        //     place.show = false;
-        // });
+        all_places_data.filter(place => {
+            place.show = false;
+        });
         setTreeModel(all_places_data) // 木構造にデータを割り当てる
         setAllPlaces(all_places_data)
 
@@ -29,27 +29,35 @@ const Home = () => {
             sw_lat: 34.39126015094337, // 南西の緯度
             sw_lng: 135.27726965086458 // 南西の経度
         }
+        // 領域値を算出
+        //const path = calcPath(3, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
+        const startTime = performance.now();
+        // --------------------計測開始--------------------
         // // 経度緯度による領域内探索(API)
         // const target_places = await getPlacesByLatlng(framePoint).catch(e => {
         //   console.log(e)
         // })
         // 経度緯度による領域内探索
-        //const target_places = WithinRangeSearch(all_places_data, framePoint)
+        const target_places = WithinRangeSearch(all_places_data, framePoint)
 
         // 領域値による探索(API)
-        const path = calcPath(3, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
-        console.log("現在のPATH:", path);
         // const res_json = await getPlacesByPath(path).catch(e => {
         //     console.log(e);
         // });
         // const tmp = searchNeighborhood(path)
         // 領域値による探索
-        const target_places = searchNeighborhood(path)
-        console.log('探索結果: ', target_places)
+        //const target_places = searchNeighborhood(path)
+        // --------------------計測終了--------------------
+        const endTime = performance.now();
+        //console.log("現在のPATH:", path);
+        console.log("初回ページ表示時")
+        //console.log('探索結果: ', target_places)
+        console.log('データ量: ', target_places.length)
+        console.log("計測結果(マイクロ秒)", endTime - startTime); // 何ミリ秒かかったかを表示する
         // 表示POPが閉じている状態にする
-        // res_json.filter(place => {
-        //     place.show = false;
-        // });
+        target_places.filter(place => {
+            place.show = false;
+        });
         setPlaces(target_places)
     }, []);
  
@@ -66,8 +74,6 @@ const Home = () => {
 
     // ドラッグアンドドロップ後のアクション
     const onDragEnd = async map => {
-        //console.log(searchNeighborhood('41'))
-        //console.log(json)
         // 表示領域4点を取得する
         const latlngBounds = map.getBounds(); //表示領域の座標
         const swLatlng = latlngBounds.getSouthWest(); // 南西
@@ -82,28 +88,33 @@ const Home = () => {
             lat: map.center.lat(),
             lng: map.center.lng(),
         };
-        console.log("framPoint: ", framePoint)
+        //const path = calcPath(3, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
+        //console.log("framPoint: ", framePoint)
+        
+        const startTime = performance.now();
+        // --------------------計測開始--------------------
         // // 経度緯度による領域内探索(API)
         // const target_places = await getPlacesByLatlng(framePoint).catch(e => {
         //   console.log(e)
         // })
         // 経度緯度による領域内探索
-        //const target_places = WithinRangeSearch(all_places, framePoint)
+        const target_places = WithinRangeSearch(all_places, framePoint)
 
         // 領域値による探索(API)
-        console.log('現在の中心点: ', center)
-        const path = calcPath(3, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
-        console.log("現在のPATH: ", path)
+        // console.log('現在の中心点: ', center)
         // const target_places = await getPlacesByPath(path).catch(e => {
         //     console.log(e);
         // });
         // 領域値による探索
-        const target_places = searchNeighborhood(path)
-
+        //const target_places = searchNeighborhood(path)
+        // --------------------計測終了--------------------
+        const endTime = performance.now();
         // res_json.filter(place => {
         //     place.show = false;
         // });
-        console.log('探索結果: ', target_places)
+        //console.log("現在のPATH: ", path)
+        console.log('データ量: ', target_places.length)
+        console.log("計測結果(マイクロ秒)", endTime - startTime); // 何ミリ秒かかったかを表示する
         setPlaces(target_places);
     };
 
@@ -120,7 +131,7 @@ const Home = () => {
                         key={place.id}
                         lat={place.latitude}
                         lng={place.longitude}
-                        // show={place.show}
+                        show={place.show}
                         place={place}
                     />
                 ))}
@@ -131,7 +142,7 @@ const Home = () => {
 
 // 範囲内探索
 const WithinRangeSearch = (places, framePoint) => {
-    console.log("places", places)
+    //console.log("places", places)
     let result = []
 
     for (let i = 0; i < places.length; i++) {
@@ -140,7 +151,7 @@ const WithinRangeSearch = (places, framePoint) => {
             result.push(places[i])
         }
     }
-    console.log("result: ", result)
+    //console.log("result: ", result)
     return result
 }
 
