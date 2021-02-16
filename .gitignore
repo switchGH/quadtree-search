@@ -6,6 +6,16 @@ import_sql.sh
 # mysql logs
 /database/logs/*
 
+# mysql migration file
+database/migration/schema/V4*
+database/migration/schema/V5*
+database/migration/schema/V6*
+database/migration/schema/V7*
+database/migration/schema/V8*
+database/migration/schema/V9*
+database/migration/schema/V10*
+database/migration/schema/V11*
+
 # sql file
 /sql_file/*
 sqltools*

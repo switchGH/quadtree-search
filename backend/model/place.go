@@ -1,9 +1,9 @@
 package model
 
 type Place struct {
-	ID              int64  `db:"id" json:"increment_id"`
-	InstitutionID   int64  `db:"institution_id" json:"institution_id"`
-	InstitutionName string `db:"institution_name" json:"institution_name"`
+	ID int64 `db:"id" json:"increment_id"`
+	// InstitutionID   int64  `db:"institution_id" json:"institution_id"`
+	// InstitutionName string `db:"institution_name" json:"institution_name"`
 	//InstitutionNameKana       string `db:"institution_name_kana" json:"institution_name_kana"`
 	// InstitutionClassification string `db:"institution_classification" json:"institution_classification"`
 	// PostCode                  string `db:"post_code" json:"post_code"`
