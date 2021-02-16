@@ -6,7 +6,9 @@ GoogleMap を表示するページ
 
 ## Feature
 
-URL: localhost:3000
+地図表示ページ: localhost:3000  
+近傍検索ページ: localhost:3000/search
+
 
 ## Settings
 
