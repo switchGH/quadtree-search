@@ -54,11 +54,11 @@ const Search = () => {
             <form onSubmit={handleSubmit}>
                 <label>
                     経度(longitude): 
-                    <input value={lng} type="number" onChange={handleLngChange} /> 
+                    <input value={lng} onChange={handleLngChange} /> 
                 </label>
                 <label>
                     緯度(latitude): 
-                     <input value={lat} type="number" onChange={handleLatChange} />
+                     <input value={lat}  onChange={handleLatChange} />
                 </label>
                 <input type="submit" value="Submit" />
             </form>
@@ -75,6 +75,7 @@ const Search = () => {
 
 // 距離を求める
 const calcDistance = (places, lat, lng) => {
+    const startTime1 = performance.now();
     //let result = []
     let lat1 = lat * Math.PI / 180
     let lng1 = lng * Math.PI / 180
@@ -84,17 +85,23 @@ const calcDistance = (places, lat, lng) => {
         let distance = 6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2));
         places[i].distance = distance
     }
+    const endTime1 = performance.now();
+    console.log("for計測結果(マイクロ秒)", endTime1 - startTime1);
 
     // 5km以内の以内のデータのみを絞る
+    const startTime2 = performance.now();
     const near_places = places.filter(place => place.distance <= 5)
-
+    const endTime2 = performance.now();
+    console.log("filter計測結果(マイクロ秒)", endTime2 - startTime2);
     // 昇順にソートする
     // near_places.sort((a, b) => {
     //     if( a.distance < b.distance ) return -1;
     //     if( a.distance > b.distance ) return 1;
     //     return 0;
     // })
+    
     return near_places
+    
 }
   
 export default Search
