@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { getPlaces } from '../api/api';
 
 const Search = () => {
-    const [lat, setLat] = useState("34.69"); // 緯度
-    const [lng, setLng] = useState("135.61"); // 経度
+    const [lat, setLat] = useState('34.69'); // 緯度
+    const [lng, setLng] = useState('135.61'); // 経度
     const [res_json, setResJSON] = useState([]); // 全地点データ
     const [places, setPlaces] = useState([]);
 
@@ -15,7 +15,7 @@ const Search = () => {
     }, []);
 
     const handleLatChange = event => {
-        setLat(event.target.value);   
+        setLat(event.target.value);
     };
 
     const handleLngChange = event => {
@@ -42,11 +42,11 @@ const Search = () => {
             <form onSubmit={handleSubmit}>
                 <label>
                     経度(longitude):
-                    <input value={ lng } type="text" onChange={ handleLngChange } />
+                    <input value={lng} type="text" onChange={handleLngChange} />
                 </label>
                 <label>
                     緯度(latitude):
-                    <input value={ lat } type="text" onChange={ handleLatChange } />
+                    <input value={lat} type="text" onChange={handleLatChange} />
                 </label>
                 <input type="submit" value="Submit" />
             </form>
@@ -54,7 +54,7 @@ const Search = () => {
                 <ul>
                     {places.map(place => (
                         <li key={place.increment_id}>
-                            施設名: {place.institution_name} & 経度: {place.longitude} & 緯度: {' '}
+                            施設名: {place.institution_name} & 経度: {place.longitude} & 緯度:{' '}
                             {place.latitude} & 経度:
                             {place.distance}
                         </li>
