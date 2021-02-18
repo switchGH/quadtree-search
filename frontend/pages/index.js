@@ -88,7 +88,7 @@ const Home = () => {
             lat: map.center.lat(),
             lng: map.center.lng(),
         };
-        //¥const path = calcPath(3, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
+        //const path = calcPath(3, center, MIN_SW, MAX_NE, DIVIVE_CENTER, '');
         //console.log("framPoint: ", framePoint)
         
         const startTime = performance.now();
