@@ -77,22 +77,22 @@ export const calcPath = (depth, center, min_sw, max_ne, divive_center, path) => 
     }
 };
 
-export const selectPathArra = (initial) => {
+export const selectPathArra = initial => {
     switch (initial) {
         case '1':
-            return { start: 0, end: 74 }
+            return { start: 0, end: 74 };
 
         case '2':
-            return { start: 75, end: 448 }
+            return { start: 75, end: 448 };
 
         case '3':
-            return { start: 449, end: 451 }
+            return { start: 449, end: 451 };
 
         case '4':
-            return { start: 452, end: 1038 }
+            return { start: 452, end: 1038 };
 
         default:
-            console.log('Error switch')
-            return {}
+            console.log('Error switch');
+            return {};
     }
-}
+};
