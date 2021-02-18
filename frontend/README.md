@@ -9,7 +9,6 @@ GoogleMap を表示するページ
 地図表示ページ: localhost:3000  
 近傍検索ページ: localhost:3000/search
 
-
 ## Settings
 
 -   環境変数の設定
