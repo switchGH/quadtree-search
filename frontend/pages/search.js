@@ -33,7 +33,7 @@ const Search = () => {
 
         console.log('検索経度緯度', lng, lat);
         console.log('データ量: ', target_places.length);
-        console.log('計測結果(マイクロ秒)', endTime - startTime);
+        console.log('計測結果(ミリ秒)', endTime - startTime);
         event.preventDefault();
     };
 
