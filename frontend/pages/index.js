@@ -53,7 +53,7 @@ const Home = () => {
         console.log('初回ページ表示時');
         //console.log('探索結果: ', target_places)
         console.log('データ量: ', target_places.length);
-        console.log('計測結果(マイクロ秒)', endTime - startTime); // 何ミリ秒かかったかを表示する
+        console.log('計測結果(ミリ秒)', endTime - startTime); // 何ミリ秒かかったかを表示する
         // 表示POPが閉じている状態にする
         target_places.filter(place => {
             place.show = false;
