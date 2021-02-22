@@ -25,7 +25,14 @@ const Search = () => {
     };
 
     const handleSubmit = event => {
-        const path = calcPath(3, { lat: parseFloat(lat), lng: parseFloat(lng) }, MIN_SW, MAX_NE, DIVIVE_CENTER, ''); // 領域値算出
+        const path = calcPath(
+            3,
+            { lat: parseFloat(lat), lng: parseFloat(lng) },
+            MIN_SW,
+            MAX_NE,
+            DIVIVE_CENTER,
+            ''
+        ); // 領域値算出
         // --------------------計測開始--------------------
         const startTime = performance.now();
         // 領域値で検索
