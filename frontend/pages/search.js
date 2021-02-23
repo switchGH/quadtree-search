@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import GoogleMap from '../components/GoogleMap';
+import Marker from '../components/Maker';
 import { getPlaces } from '../api/api';
 
 const Search = () => {
+    const [center, setCenter] = useState({ lat: 34.4111, lng: 135.3008 })
     const [lat, setLat] = useState('34.69'); // 緯度
     const [lng, setLng] = useState('135.61'); // 経度
     const [res_json, setResJSON] = useState([]); // 全地点データ
@@ -23,6 +26,7 @@ const Search = () => {
     };
 
     const handleSubmit = event => {
+        setCenter({ lat: parseFloat(lat), lng: parseFloat(lng) })
         // --------------------計測開始--------------------
         const startTime = performance.now();
         // 距離で検索
@@ -39,6 +43,25 @@ const Search = () => {
 
     return (
         <div>
+            <div style={{ height: '70vh', width: '70vh', marginTop: '30px', marginLeft: '30px' }}>
+            <GoogleMap
+                defaultZoom={14}
+                center={center}
+                // onChildClick={onClildClickCallback}
+                // onDragEnd={onDragEnd}
+            >
+                {places.map(place => (
+                    <Marker
+                        key={place.id}
+                        lat={place.latitude}
+                        lng={place.longitude}
+                        // show={place.show}
+                        place={place}
+                    />
+                ))}
+            </GoogleMap>
+        </div>
+        <div>   
             <form onSubmit={handleSubmit}>
                 <label>
                     経度(longitude):
@@ -55,12 +78,13 @@ const Search = () => {
                     {places.map(place => (
                         <li key={place.increment_id}>
                             施設名: {place.institution_name} & 経度: {place.longitude} & 緯度:{' '}
-                            {place.latitude} & 経度:
+                            {place.latitude} & 距離:
                             {place.distance}
                         </li>
                     ))}
                 </ul>
             </div>
+        </div>
         </div>
     );
 };
