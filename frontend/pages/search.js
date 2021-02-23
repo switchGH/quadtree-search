@@ -45,7 +45,7 @@ const Search = () => {
         <div>
             <div style={{ height: '70vh', width: '70vh', marginTop: '30px', marginLeft: '30px' }}>
             <GoogleMap
-                defaultZoom={14}
+                defaultZoom={13}
                 center={center}
                 // onChildClick={onClildClickCallback}
                 // onDragEnd={onDragEnd}
