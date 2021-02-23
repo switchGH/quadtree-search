@@ -30,7 +30,7 @@ const Search = () => {
     const handleSubmit = event => {
         setCenter({ lat: parseFloat(lat), lng: parseFloat(lng) })
         const path = calcPath(
-            3,
+            4,
             { lat: parseFloat(lat), lng: parseFloat(lng) },
             MIN_SW,
             MAX_NE,

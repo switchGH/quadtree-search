@@ -132,7 +132,7 @@ func main() {
 
 	repo := &repository{}
 	// 地点範囲と深さを設定する
-	if err := repo.init(minPoint, maxPoint, 3); err != nil {
+	if err := repo.init(minPoint, maxPoint, 4); err != nil {
 		log.Fatal(err)
 		return
 	}
