@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
+import GoogleMap from '../components/GoogleMap';
+import Marker from '../components/Maker';
 import { setTreeModel, searchNeighborhood } from '../util/tree';
 import { calcPath } from '../util/path';
 import { getPlaces } from '../api/api';
 import { MIN_SW, MAX_NE, DIVIVE_CENTER } from '../osakafu_latlng';
 
 const Search = () => {
+    const [center, setCenter] = useState({ lat: 34.4111, lng: 135.3008 })
     const [lat, setLat] = useState('34.69'); // 緯度
     const [lng, setLng] = useState('135.61'); // 経度
     const [places, setPlaces] = useState([]);
@@ -25,6 +28,7 @@ const Search = () => {
     };
 
     const handleSubmit = event => {
+        setCenter({ lat: parseFloat(lat), lng: parseFloat(lng) })
         const path = calcPath(
             3,
             { lat: parseFloat(lat), lng: parseFloat(lng) },
@@ -56,6 +60,25 @@ const Search = () => {
 
     return (
         <div>
+            <div style={{ height: '70vh', width: '70vh', marginTop: '30px', marginLeft: '30px' }}>
+            <GoogleMap
+                defaultZoom={14}
+                center={center}
+                // onChildClick={onClildClickCallback}
+                // onDragEnd={onDragEnd}
+            >
+                {places.map(place => (
+                    <Marker
+                        key={place.id}
+                        lat={place.latitude}
+                        lng={place.longitude}
+                        // show={place.show}
+                        place={place}
+                    />
+                ))}
+            </GoogleMap>
+        </div>
+        <div>
             <form onSubmit={handleSubmit}>
                 <label>
                     経度(longitude):
@@ -77,6 +100,7 @@ const Search = () => {
                         </li>
                     ))}
                 </ul>
+            </div>
             </div>
         </div>
     );
