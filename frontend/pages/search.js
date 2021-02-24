@@ -38,6 +38,9 @@ const Search = () => {
         console.log('検索経度緯度', lng, lat);
         console.log('データ量: ', target_places.length);
         console.log('計測結果(ミリ秒)', endTime - startTime);
+        for (let i = 0; i < target_places.length; i++) {
+            console.log(target_places[i].increment_id)
+        }
         event.preventDefault();
     };
 
