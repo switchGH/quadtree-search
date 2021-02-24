@@ -31,53 +31,53 @@ const Search = () => {
         setCenter({ lat: parseFloat(lat), lng: parseFloat(lng) })
 
         // 中心座標とその８近傍の経度緯度を配列に格納する
-        let latlng = []
-        latlng.push({ lat: parseFloat(lat), lng: parseFloat(lng)})
-        latlng.push({ lat: parseFloat(lat) + parseFloat(0.04), lng: parseFloat(lng) })
-        latlng.push({ lat: parseFloat(lat) - parseFloat(0.04), lng: parseFloat(lng) })
-        latlng.push({ lat: parseFloat(lat), lng: parseFloat(lng) + parseFloat(0.04) })
-        latlng.push({ lat: parseFloat(lat), lng: parseFloat(lng) - parseFloat(0.04) })
+        // let latlng = []
+        // latlng.push({ lat: parseFloat(lat), lng: parseFloat(lng)})
+        // latlng.push({ lat: parseFloat(lat) + parseFloat(0.04), lng: parseFloat(lng) })
+        // latlng.push({ lat: parseFloat(lat) - parseFloat(0.04), lng: parseFloat(lng) })
+        // latlng.push({ lat: parseFloat(lat), lng: parseFloat(lng) + parseFloat(0.04) })
+        // latlng.push({ lat: parseFloat(lat), lng: parseFloat(lng) - parseFloat(0.04) })
 
-        latlng.push({ lat: parseFloat(lat) + parseFloat(0.04), lng: parseFloat(lng) + parseFloat(0.04) })
-        latlng.push({ lat: parseFloat(lat) - parseFloat(0.04), lng: parseFloat(lng) - parseFloat(0.04) })
-        latlng.push({ lat: parseFloat(lat) + parseFloat(0.04), lng: parseFloat(lng) - parseFloat(0.04) })
-        latlng.push({ lat: parseFloat(lat) - parseFloat(0.04), lng: parseFloat(lng) + parseFloat(0.04) })
+        // latlng.push({ lat: parseFloat(lat) + parseFloat(0.04), lng: parseFloat(lng) + parseFloat(0.04) })
+        // latlng.push({ lat: parseFloat(lat) - parseFloat(0.04), lng: parseFloat(lng) - parseFloat(0.04) })
+        // latlng.push({ lat: parseFloat(lat) + parseFloat(0.04), lng: parseFloat(lng) - parseFloat(0.04) })
+        // latlng.push({ lat: parseFloat(lat) - parseFloat(0.04), lng: parseFloat(lng) + parseFloat(0.04) })
 
-        console.log(latlng)
+        // console.log(latlng)
         // 領域値算出
-        // const path = calcPath(
-        //     4,
-        //     { lat: parseFloat(lat), lng: parseFloat(lng) },
-        //     MIN_SW,
-        //     MAX_NE,
-        //     DIVIVE_CENTER,
-        //     ''
-        // );
+        const path = calcPath(
+            3,
+            { lat: parseFloat(lat), lng: parseFloat(lng) },
+            MIN_SW,
+            MAX_NE,
+            DIVIVE_CENTER,
+            ''
+        );
 
-        let path = []
-        for (let i = 0; i < 9; i++) {
-            path.push(calcPath(
-                4,
-               latlng[i],
-                MIN_SW,
-                MAX_NE,
-                DIVIVE_CENTER,
-                ''
-            ))
-        }
+        // let path = []
+        // for (let i = 0; i < 9; i++) {
+        //     path.push(calcPath(
+        //         4,
+        //        latlng[i],
+        //         MIN_SW,
+        //         MAX_NE,
+        //         DIVIVE_CENTER,
+        //         ''
+        //     ))
+        // }
         // 領域地の重複削除する
-        path = Array.from(new Set(path))
-        console.log(path)
+        // path = Array.from(new Set(path))
+        // console.log(path)
 
-        let target_places = []
+        //let target_places = []
         // --------------------計測開始--------------------
         const startTime = performance.now();
         // 領域値で検索
-        //const target_places = searchNeighborhood(path);
+        const target_places = searchNeighborhood(path);
 
-        for (let i = 0; i < path.length; i++) {
-            target_places = target_places.concat(searchNeighborhood(path[i]))
-        }
+        // for (let i = 0; i < path.length; i++) {
+        //     target_places = target_places.concat(searchNeighborhood(path[i]))
+        // }
 
         // --------------------計測終了--------------------
         const endTime = performance.now();
