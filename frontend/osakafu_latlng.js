@@ -7,11 +7,11 @@ export const MIN_SW = {
 // 最北東
 export const MAX_NE = {
     lat: 35.05234, // 北東
-    lng: 135.87172, // 北東
+    lng: 136.04290, // 北東
 };
 
 // ４分割時の中心点
 export const DIVIVE_CENTER = {
     lat: 34.66245,
-    lng: 135.419175,
+    lng: 135.56742,
 };
