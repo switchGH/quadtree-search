@@ -111,22 +111,22 @@ func (r *repository) getPointData(point *qtree.Point) ([]*qtree.Point, error) {
 }
 
 func main() {
-	// 扱いたい領域の端2点
+	// 大阪府の領域
 	// minPoint := &qtree.Point{
-	// 	X: 135.0,
-	// 	Y: 34.0,
+	// 	X: 135.09194,
+	// 	Y: 34.27256,
 	// }
 	// maxPoint := &qtree.Point{
-	// 	X: 136.0,
-	// 	Y: 35.0,
+	// 	X: 135.74641,
+	// 	Y: 35.05234,
 	// }
-	// 大阪府の領域
+	// 大阪府を正方形で囲う領域
 	minPoint := &qtree.Point{
 		X: 135.09194,
 		Y: 34.27256,
 	}
 	maxPoint := &qtree.Point{
-		X: 135.74641,
+		X: 135.87172,
 		Y: 35.05234,
 	}
 
@@ -144,7 +144,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//fmt.Printf("%+v", points[0])
 
 	// 経路(path)を追加したデータをDBに挿入する
 	for _, v := range points {

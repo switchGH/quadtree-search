@@ -7,7 +7,7 @@ export const MIN_SW = {
 // 最北東
 export const MAX_NE = {
     lat: 35.05234, // 北東
-    lng: 135.74641, // 北東
+    lng: 135.87172, // 北東
 };
 
 // ４分割時の中心点

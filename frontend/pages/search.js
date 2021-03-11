@@ -65,7 +65,7 @@ const Search = () => {
         //         ''
         //     ))
         // }
-        // 領域地の重複削除する
+        //領域地の重複削除する
         // path = Array.from(new Set(path))
         // console.log(path)
 
@@ -83,9 +83,9 @@ const Search = () => {
         const endTime = performance.now();
         setPlaces(target_places);
 
-        for (let i = 0; i < target_places.length; i++) {
-            console.log(target_places[i].increment_id)
-        }
+        // for (let i = 0; i < target_places.length; i++) {
+        //     console.log(target_places[i].increment_id)
+        // }
         console.log(
             '検索経度緯度: ',
             lng,
