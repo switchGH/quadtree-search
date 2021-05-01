@@ -17,7 +17,8 @@ type Place struct {
 	// LocationName string `db:"location_name" json:"location_name"`
 	// InstallationDate          int64   `db:"installation_date" json:"installation_date"`
 	// AedModel  string  `db:"aed_model" json:"aed_model"`
-	Latitude  float64 `db:"latitude" json:"latitude"`
-	Longitude float64 `db:"longitude" json:"longitude"`
+	Latitude  float64 `db:"latitude" json:"lat"`
+	Longitude float64 `db:"longitude" json:"lng"`
 	Path      string  `db:"path" json:"path"`
+	Geohash   string  `db:"geohash" json:"geohash"`
 }

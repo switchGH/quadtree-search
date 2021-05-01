@@ -17,7 +17,10 @@ func SearchByLatLng(db *sqlx.DB, swLat float64, swLng float64, neLat float64, ne
 
 func SearchByPath(db *sqlx.DB, path string) ([]model.Place, error) {
 	a := make([]model.Place, 0)
-	if err := db.Select(&a, `SELECT id, latitude, longitude, path FROM places WHERE path LIKE ? ORDER BY path ASC`, path+"%"); err != nil {
+	// if err := db.Select(&a, `SELECT id, latitude, longitude, path FROM places WHERE path LIKE ? ORDER BY path ASC`, path+"%"); err != nil {
+	// 	return nil, err
+	// }
+	if err := db.Select(&a, `SELECT id, latitude, longitude, path, geohash FROM places`); err != nil {
 		return nil, err
 	}
 	return a, nil
